@@ -1,6 +1,5 @@
 #! python3
 #A Game of Tic Tac Toe
-#Still need to bugs where it doesn't detect duplicate wins
 import sys 
 
 def printBox(b):
@@ -27,6 +26,7 @@ def playAgain():
         elif again == "N":
             print("Thanks for playing!\nExiting program...")
             return False
+            sys.exit()
         else: 
             print("invalid input")
             continue
@@ -73,11 +73,8 @@ def tic_tac_toe():
         print()
         inplist[current_player].append( int(pinp) ) # holds a list of all player input
         setlist=[set(inplist[0]),set(inplist[1])] #list containing the 2 sets based off the 2 input lists
-        # for win in winset:
-        #     print(win)
-        # print(setlist[current_player])
         for win in winset:
-            print(f"win is {win} and current input set is {setlist[current_player]}") #diagnostic
+            # print(f"win is {win} and current input set is {setlist[current_player]}") #diagnostic
             if win.issubset(setlist[current_player]): #THIS IS THE BUGGY LINE OF CODE
                 won=True
         if won:
@@ -86,7 +83,7 @@ def tic_tac_toe():
                 b = ['   ' for _ in range(9)]
                 printBox(b) #prints fresh box
                 inplist=[[],[]] #resets input lists to being empty
-                break
+                continue
             else: sys.exit()
         tie = "   " not in b
         if tie:
@@ -95,7 +92,7 @@ def tic_tac_toe():
                 b = ['   ' for _ in range(9)]
                 printBox(b) #prints fresh box
                 inplist=[[],[]] #resets input lists to being empty
-                break
+                continue
             else: sys.exit()
         turn+=1
 
